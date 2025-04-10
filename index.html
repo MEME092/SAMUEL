@@ -7,375 +7,497 @@
   <title>StreamFocus - Reseñas de Streaming</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
   <style>
+    /* Estilos generales */
     body { font-family: 'Roboto', sans-serif; margin: 0; background: #f9f9f9; color: #333; }
     header, footer { background: #1e1e2f; color: white; text-align: center; padding: 1rem; }
-    nav { background: #333; text-align: center; padding: 0.5rem; }
-    nav a { color: white; margin: 0 1rem; text-decoration: none; }
     .container { max-width: 960px; margin: auto; padding: 2rem; }
     .section { margin-bottom: 3rem; background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
     h2 { color: #1e88e5; }
-    a { color: #1e88e5; }
+    a { color: #1e88e5; text-decoration: none; }
     .footer-links a { color: #ccc; margin: 0 1rem; font-size: 0.9rem; }
     form { display: flex; flex-direction: column; }
     form input, form textarea { margin-bottom: 1rem; padding: 0.5rem; font-size: 1rem; }
     form button { background: #1e88e5; color: white; border: none; padding: 0.5rem; font-size: 1rem; cursor: pointer; }
     form button:hover { background: #1565c0; }
+
+    /* Menú de navegación */
+    nav {
+      background: #333;
+      text-align: center;
+      padding: 0.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    nav a { color: white; margin: 0 1rem; }
+    #menu-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: none;
+      transition: transform 0.3s ease;
+    }
+    #menu-toggle.active {
+      transform: rotate(90deg);
+      color: #ffca28;
+    }
+    #nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    @media screen and (max-width: 768px) {
+      #menu-toggle { display: block; }
+      #nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background: #333;
+      }
+      #nav-links.show { display: flex; }
+    }
+
+    /* Flecha flotante "Volver arriba" */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 40px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, #1e88e5, #42a5f5);
+      color: white;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    #scrollTopBtn:hover {
+      background: linear-gradient(135deg, #1565c0, #1e88e5);
+      transform: scale(1.1);
+    }
   </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5710936095528547"
-     crossorigin="anonymous"></script>
-<meta name="keywords" content="streaming, netflix, disney+, hbo max, prime video, reseñas, comparativas, plataformas, apple tv, star+">
+
+  <meta name="keywords" content="streaming, netflix, disney+, hbo max, prime video, reseñas, comparativas, plataformas, apple tv, star+">
   <meta name="author" content="StreamFocus">
   <meta property="og:title" content="StreamFocus - Reseñas de Streaming">
   <meta property="og:description" content="Descubre comparativas y análisis de las plataformas de streaming más populares.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tusitioweb.com">
   <meta property="og:image" content="https://tusitioweb.com/imagen-og.jpg">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NN4ZC0G5YD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-NN4ZC0G5YD');
-</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NN4ZC0G5YD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-NN4ZC0G5YD');
+  </script>
 </head>
 <body>
 
-<header>
-  <h1>StreamFocus</h1>
-  <p>Descubre la mejor plataforma de streaming para ti</p>
-</header>
+  <header>
+    <h1>StreamFocus</h1>
+    <p>Descubre la mejor plataforma de streaming para ti</p>
+  </header>
 
-<nav>
-  <a href="#inicio">Inicio</a>
-  <a href="#reseñas">Reseñas</a>
-  <a href="#comparativas">Comparativas</a>
-  <a href="#contacto">Contacto</a>
-  <a href="#privacidad">Privacidad</a>
-  <a href="#terminos">Términos y Condiciones</a>
-</nav>
+  <nav>
+    <button id="menu-toggle" aria-label="Abrir menú">☰</button>
+    <div id="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#reseñas">Reseñas</a>
+      <a href="#comparativas">Comparativas</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#privacidad">Privacidad</a>
+      <a href="#terminos">Términos y Condiciones</a>
+    </div>
+  </nav>
 
-<div class="container">
-  <section id="inicio" class="section">
-    <h2>Bienvenido a StreamFocus</h2>
-    <p>En este blog encontrarás análisis honestos y comparativas de las plataformas de streaming más populares del momento. Nuestro objetivo es ayudarte a elegir el servicio que mejor se adapte a tus gustos y necesidades.</p>
-  </section>
+  <div class="container">
+    <!-- Sección de bienvenida -->
+    <section id="inicio" class="section">
+      <h2>Bienvenido a StreamFocus</h2>
+      <p>En este blog encontrarás análisis honestos y comparativas de las plataformas de streaming más populares del momento. Nuestro objetivo es ayudarte a elegir el servicio que mejor se adapte a tus gustos y necesidades.</p>
+    </section>
 
-  <section id="reseñas" class="section">
-    <h2>Reseñas Recientes</h2>
+    <!-- Sección de reseñas recientes -->
+    <section id="reseñas" class="section">
+      <h2>Reseñas Recientes</h2>
+      <h3>Tema destacado</h3>
+      <p>Netflix ofrece una gran variedad de contenido original, pero ¿vale la pena en 2025? <a href="https://www.netflix.com" target="_blank">Descúbrelo aquí</a>.</p>
+      <h3>Tema destacado</h3>
+      <p>Con todo el catálogo de Disney, Marvel, Star Wars y Pixar, Disney+ es una apuesta segura para familias. <a href="https://www.disneyplus.com" target="_blank">Mira más</a>.</p>
+      <h3>Tema destacado</h3>
+      <p>Si prefieres calidad sobre cantidad, HBO Max podría ser tu opción. <a href="https://www.hbomax.com" target="_blank">Ver reseña</a>.</p>
+      <h3>Tema destacado</h3>
+      <p>Amazon Prime Video no solo ofrece una amplia gama de películas y series, sino también beneficios adicionales para los suscriptores de Amazon Prime. <a href="https://www.primevideo.com" target="_blank">Conoce más</a>.</p>
+      <h3>Tema destacado</h3>
+      <p>Apple TV+ se centra en contenido original con producciones de alta calidad y narrativas únicas. <a href="https://tv.apple.com" target="_blank">Explora su catálogo</a>.</p>
+      <h3>Tema destacado</h3>
+      <p>Star+ combina series, películas y eventos deportivos en vivo, dirigido a un público más adulto. <a href="https://www.starplus.com" target="_blank">Más detalles aquí</a>.</p>
+    </section>
 
-    <h3>Tema destacado</h3>
-    <p>Netflix ofrece una gran variedad de contenido original, pero ¿vale la pena en 2025? <a href="https://www.netflix.com" target="_blank">Descúbrelo aquí</a>.</p>
+    <!-- Sección de Entradas del Blog (30 entradas con fechas diferentes) -->
+    <section class="section">
+      <h2>Entradas del Blog</h2>
+      
+      <!-- Entrada 1: 10 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>El dominio de Netflix: ¿Mito o realidad?</h3>
+        <p><strong>Fecha:</strong> 10 de abril de 2025</p>
+        <p>Análisis profundo sobre la evolución y liderazgo de Netflix en el mercado.</p>
+      </div>
+      
+      <!-- Entrada 2: 09 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?disney" alt="Imagen relacionada con Disney+" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Disney+ y su magia familiar</h3>
+        <p><strong>Fecha:</strong> 09 de abril de 2025</p>
+        <p>Una mirada a cómo Disney+ se ha posicionado como la opción ideal para familias.</p>
+      </div>
+      
+      <!-- Entrada 3: 08 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?hbomax" alt="Imagen relacionada con HBO Max" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>HBO Max: Calidad sobre cantidad</h3>
+        <p><strong>Fecha:</strong> 08 de abril de 2025</p>
+        <p>Análisis de las producciones y estrategia de HBO Max para competir en el mercado.</p>
+      </div>
+      
+      <!-- Entrada 4: 07 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?amazon" alt="Imagen relacionada con Amazon Prime Video" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Amazon Prime Video: Más que solo envíos</h3>
+        <p><strong>Fecha:</strong> 07 de abril de 2025</p>
+        <p>Descubre los beneficios adicionales y ventajas competitivas de Prime Video.</p>
+      </div>
+      
+      <!-- Entrada 5: 06 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?appletv" alt="Imagen relacionada con Apple TV+" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Apple TV+: Originalidad sin límites</h3>
+        <p><strong>Fecha:</strong> 06 de abril de 2025</p>
+        <p>Una revisión de las producciones originales y el enfoque creativo de Apple TV+.</p>
+      </div>
+      
+      <!-- Entrada 6: 05 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?espn,sports" alt="Imagen relacionada con Star+" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Star+ y su apuesta deportiva</h3>
+        <p><strong>Fecha:</strong> 05 de abril de 2025</p>
+        <p>Explora cómo Star+ combina entretenimiento y eventos deportivos en vivo.</p>
+      </div>
+      
+      <!-- Entrada 7: 04 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?anime" alt="Imagen relacionada con anime" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Top 5 animes en streaming</h3>
+        <p><strong>Fecha:</strong> 04 de abril de 2025</p>
+        <p>Una selección de los mejores animes disponibles en plataformas de streaming.</p>
+      </div>
+      
+      <!-- Entrada 8: 03 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?startup,streaming" alt="Imagen relacionada con plataformas emergentes" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>¿Tienen futuro las nuevas plataformas?</h3>
+        <p><strong>Fecha:</strong> 03 de abril de 2025</p>
+        <p>Análisis de las startups y la innovación en el sector del streaming.</p>
+      </div>
+      
+      <!-- Entrada 9: 02 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?classic,movie" alt="Imagen relacionada con películas clásicas" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Películas clásicas: joyas ocultas en streaming</h3>
+        <p><strong>Fecha:</strong> 02 de abril de 2025</p>
+        <p>Descubre las películas clásicas que han encontrado nueva vida en las plataformas de streaming.</p>
+      </div>
+      
+      <!-- Entrada 10: 01 de abril de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?tv,drama" alt="Imagen relacionada con series populares" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Las series que definieron 2024</h3>
+        <p><strong>Fecha:</strong> 01 de abril de 2025</p>
+        <p>Un repaso a las series que marcaron tendencia el año pasado.</p>
+      </div>
+      
+      <!-- Entrada 11: 31 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?money,subscription" alt="Imagen relacionada con precios de streaming" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>¿Cuál plataforma es más económica?</h3>
+        <p><strong>Fecha:</strong> 31 de marzo de 2025</p>
+        <p>Comparativa de precios y planes de suscripción entre las principales plataformas.</p>
+      </div>
+      
+      <!-- Entrada 12: 30 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?latinoamerica,streaming" alt="Imagen sobre streaming en Latinoamérica" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Streaming en Latinoamérica: desafíos y oportunidades</h3>
+        <p><strong>Fecha:</strong> 30 de marzo de 2025</p>
+        <p>Exploración de los retos y potenciales en el mercado latinoamericano de streaming.</p>
+      </div>
+      
+      <!-- Entrada 13: 29 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?future,streaming" alt="Imagen sobre novedades en streaming" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Novedades esperadas en plataformas para 2025</h3>
+        <p><strong>Fecha:</strong> 29 de marzo de 2025</p>
+        <p>Anticipando las innovaciones y lanzamientos del próximo año en streaming.</p>
+      </div>
+      
+      <!-- Entrada 14: 28 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?kids,streaming" alt="Imagen sobre control parental" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Perfiles infantiles: control parental en streaming</h3>
+        <p><strong>Fecha:</strong> 28 de marzo de 2025</p>
+        <p>Analizamos cómo las plataformas se adaptan para ofrecer contenido seguro para niños.</p>
+      </div>
+      
+      <!-- Entrada 15: 27 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?documentary,series" alt="Imagen sobre series documentales" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Series documentales recomendadas en cada plataforma</h3>
+        <p><strong>Fecha:</strong> 27 de marzo de 2025</p>
+        <p>Una selección de documentales imperdibles para ver en streaming.</p>
+      </div>
+      
+      <!-- Entrada 16: 26 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?hd,4k,sound" alt="Imagen sobre calidad audiovisual" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Análisis de calidad de audio y video por plataforma</h3>
+        <p><strong>Fecha:</strong> 26 de marzo de 2025</p>
+        <p>Comparativa técnica de la calidad de transmisión entre diferentes servicios.</p>
+      </div>
+      
+      <!-- Entrada 17: 25 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?ux,app" alt="Imagen sobre experiencia de usuario" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>¿Qué app es más fácil de usar?</h3>
+        <p><strong>Fecha:</strong> 25 de marzo de 2025</p>
+        <p>Evaluación de la interfaz y facilidad de uso de las aplicaciones de streaming.</p>
+      </div>
+      
+      <!-- Entrada 18: 24 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?offline,download" alt="Imagen sobre visualización offline" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Ver sin internet: la batalla de la descarga</h3>
+        <p><strong>Fecha:</strong> 24 de marzo de 2025</p>
+        <p>Comparación de las opciones de visualización offline en cada plataforma.</p>
+      </div>
+      
+      <!-- Entrada 19: 23 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?cancelled,tv" alt="Imagen sobre series canceladas" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Grandes series que fueron canceladas</h3>
+        <p><strong>Fecha:</strong> 23 de marzo de 2025</p>
+        <p>Análisis de las series que, a pesar de su calidad, no pudieron mantenerse en emisión.</p>
+      </div>
+      
+      <!-- Entrada 20: 22 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?exclusive,movie" alt="Imagen sobre películas exclusivas" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Top películas exclusivas del mes</h3>
+        <p><strong>Fecha:</strong> 22 de marzo de 2025</p>
+        <p>Listado de las películas exclusivas más vistas y comentadas del último mes.</p>
+      </div>
+      
+      <!-- Entrada 21: 21 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?cinema,streaming" alt="Imagen sobre impacto en el cine" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>El impacto del streaming en el cine</h3>
+        <p><strong>Fecha:</strong> 21 de marzo de 2025</p>
+        <p>Cómo el streaming está transformando la experiencia cinematográfica tradicional.</p>
+      </div>
+      
+      <!-- Entrada 22: 20 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?strike,actors" alt="Imagen sobre huelga de actores" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Huelgas en Hollywood y su efecto en tu catálogo</h3>
+        <p><strong>Fecha:</strong> 20 de marzo de 2025</p>
+        <p>Análisis del impacto que tienen las huelgas de actores en la producción y disponibilidad de contenido.</p>
+      </div>
+      
+      <!-- Entrada 23: 19 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?local,international,content" alt="Imagen sobre contenido local" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Contenido local que conquista el mundo</h3>
+        <p><strong>Fecha:</strong> 19 de marzo de 2025</p>
+        <p>Análisis de cómo el contenido local se está volviendo global en el mundo del streaming.</p>
+      </div>
+      
+      <!-- Entrada 24: 18 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?marketing,streaming" alt="Imagen sobre marketing en streaming" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Así promocionan sus series las plataformas</h3>
+        <p><strong>Fecha:</strong> 18 de marzo de 2025</p>
+        <p>Exploración de las estrategias de marketing y promoción utilizadas por los servicios de streaming.</p>
+      </div>
+      
+      <!-- Entrada 25: 17 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?leaderboard,streaming" alt="Imagen sobre liderazgo de mercado" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>¿Quién lidera el mercado en 2025?</h3>
+        <p><strong>Fecha:</strong> 17 de marzo de 2025</p>
+        <p>Análisis comparativo para determinar el líder en el competido mundo del streaming.</p>
+      </div>
+      
+      <!-- Entrada 26: 16 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?technology,innovation" alt="Imagen sobre nuevas tecnologías" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Nuevas tecnologías que mejoran tu experiencia</h3>
+        <p><strong>Fecha:</strong> 16 de marzo de 2025</p>
+        <p>Exploración de las innovaciones tecnológicas que optimizan la experiencia de usuario en streaming.</p>
+      </div>
+      
+      <!-- Entrada 27: 15 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?family,subscription" alt="Imagen sobre planes familiares" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Planes familiares: ¿quién ofrece más?</h3>
+        <p><strong>Fecha:</strong> 15 de marzo de 2025</p>
+        <p>Análisis de las suscripciones y planes familiares en las principales plataformas de streaming.</p>
+      </div>
+      
+      <!-- Entrada 28: 14 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?subtitles,dubbed" alt="Imagen sobre subtítulos y doblaje" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>¿Subtítulos o doblaje? Las preferencias reales</h3>
+        <p><strong>Fecha:</strong> 14 de marzo de 2025</p>
+        <p>Comparación entre la popularidad del doblaje y los subtítulos en el consumo global.</p>
+      </div>
+      
+      <!-- Entrada 29: 13 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?smarttv,apps" alt="Imagen sobre streaming en smart TVs" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>¿Qué tan bien funciona en tu smart TV?</h3>
+        <p><strong>Fecha:</strong> 13 de marzo de 2025</p>
+        <p>Evaluación del rendimiento y compatibilidad de las aplicaciones de streaming en televisores inteligentes.</p>
+      </div>
+      
+      <!-- Entrada 30: 12 de marzo de 2025 -->
+      <div class="section">
+        <img src="https://source.unsplash.com/900x400/?anime,horror,documentary" alt="Imagen sobre plataformas de nicho" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin-bottom:1rem;">
+        <h3>Plataformas de nicho que debes conocer</h3>
+        <p><strong>Fecha:</strong> 12 de marzo de 2025</p>
+        <p>Un recorrido por las plataformas especializadas en géneros de nicho como anime, terror y documentales.</p>
+      </div>
+      
+    </section>
 
-    <h3>Tema destacado</h3>
-    <p>Con todo el catálogo de Disney, Marvel, Star Wars y Pixar, Disney+ es una apuesta segura para familias. <a href="https://www.disneyplus.com" target="_blank">Mira más</a>.</p>
+    <!-- Sección de Comparativa Rápida -->
+    <section id="comparativas" class="section">
+      <h2>Comparativa Rápida</h2>
+      <ul>
+        <li><strong>Netflix:</strong> Mucho contenido, precios medios.</li>
+        <li><strong>Disney+:</strong> Enfoque familiar, catálogo icónico.</li>
+        <li><strong>HBO Max:</strong> Cine de estreno, series de calidad.</li>
+        <li><strong>Amazon Prime Video:</strong> Variedad y beneficios de Prime.</li>
+        <li><strong>Apple TV+:</strong> Contenido original exclusivo.</li>
+        <li><strong>Star+:</strong> Deportes en vivo y series para adultos.</li>
+      </ul>
+    </section>
 
-    <h3>Tema destacado</h3>
-    <p>Si prefieres calidad sobre cantidad, HBO Max podría ser tu opción. <a href="https://www.hbomax.com" target="_blank">Ver reseña</a>.</p>
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="section">
+      <h2>Contacto</h2>
+      <p>¿Tienes dudas o quieres sugerir una reseña? Completa el siguiente formulario o escríbenos a: <a href="mailto:adserty797@gmail.com">adserty797@gmail.com</a></p>
+      <form action="https://formspree.io/f/your-form-id" method="POST">
+        <input type="text" name="name" placeholder="Tu nombre" required>
+        <input type="email" name="_replyto" placeholder="Tu correo electrónico" required>
+        <textarea name="message" placeholder="Tu mensaje" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
 
-    <h3>Tema destacado</h3>
-    <p>Amazon Prime Video no solo ofrece una amplia gama de películas y series, sino también beneficios adicionales para los suscriptores de Amazon Prime. <a href="https://www.primevideo.com" target="_blank">Conoce más</a>.</p>
+    <!-- Sección de Política de Privacidad -->
+    <section id="privacidad" class="section">
+      <h2>Política de Privacidad</h2>
+      <p>Este sitio no recopila información personal sin consentimiento. Utilizamos cookies para mejorar la experiencia del usuario. Si tienes dudas sobre nuestra política, contáctanos.</p>
+    </section>
 
-    <h3>Tema destacado</h3>
-    <p>Apple TV+ se centra en contenido original con producciones de alta calidad y narrativas únicas. <a href="https://tv.apple.com" target="_blank">Explora su catálogo</a>.</p>
+    <!-- Sección de Términos y Condiciones -->
+    <section id="terminos" class="section">
+      <h2>Términos y Condiciones</h2>
+      <p>El uso de este sitio implica la aceptación de los siguientes términos y condiciones:</p>
+      <ul>
+        <li>Este sitio tiene fines informativos y de entretenimiento sobre plataformas de streaming.</li>
+        <li>No estamos afiliados oficialmente con ninguna plataforma mencionada.</li>
+        <li>Los enlaces externos pueden llevar a sitios de terceros con sus propias políticas de privacidad.</li>
+        <li>No garantizamos la disponibilidad o exactitud total de la información publicada.</li>
+        <li>El contenido puede actualizarse o modificarse sin previo aviso.</li>
+      </ul>
+      <p>Para cualquier duda, por favor contáctanos a través del formulario de contacto.</p>
+    </section>
 
-    <h3>Tema destacado</h3>
-    <p>Star+ combina series, películas y eventos deportivos en vivo, dirigido a un público más adulto. <a href="https://www.starplus.com" target="_blank">Más detalles aquí</a>.</p>
-  </section>
+    <!-- Sección para Compartir en Redes Sociales -->
+    <section class="section">
+      <h2>Comparte este sitio</h2>
+      <p>Si te gustó el contenido, compártelo en tus redes sociales:</p>
+      <div style="display: flex; gap: 1rem;">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://tusitioweb.com" target="_blank">Facebook</a>
+        <a href="https://twitter.com/intent/tweet?url=https://tusitioweb.com&text=Descubre%20reseñas%20de%20plataformas%20de%20streaming" target="_blank">Twitter</a>
+        <a href="https://wa.me/?text=Echa%20un%20vistazo%20a%20este%20blog%20de%20streaming:%20https://tusitioweb.com" target="_blank">WhatsApp</a>
+      </div>
+    </section>
+  </div>
 
-  <section class="section">
-    <h2>Entradas del Blog</h2>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Tema destacado</h3>
-      <p><strong>Fecha:</strong> 10 de April de 2025</p>
-      <p>La evolución de Netflix en los últimos años.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Disney+ y su magia familiar</h3>
-      <p><strong>Fecha:</strong> 09 de April de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?disney" alt="Imagen relacionada con Disney+" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Disney+ y su enfoque en contenido familiar.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>HBO Max: Calidad sobre cantidad</h3>
-      <p><strong>Fecha:</strong> 08 de April de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?hbomax" alt="Imagen relacionada con HBO Max" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>¿Qué diferencia a HBO Max del resto?</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Amazon Prime Video: Más que solo envíos</h3>
-      <p><strong>Fecha:</strong> 07 de April de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?amazon" alt="Imagen relacionada con Amazon Prime Video" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Beneficios ocultos de Amazon Prime Video.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Apple TV+: Originalidad sin límites</h3>
-      <p><strong>Fecha:</strong> 06 de April de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?appletv" alt="Imagen relacionada con Apple TV+" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Producciones originales en Apple TV+ que valen la pena.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Star+ y su apuesta deportiva</h3>
-      <p><strong>Fecha:</strong> 05 de April de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?espn,sports" alt="Imagen relacionada con Star+" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Star+ y su alianza con ESPN: ¿vale la pena?</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Top 5 animes en streaming</h3>
-      <p><strong>Fecha:</strong> 04 de April de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?anime" alt="Imagen relacionada con anime" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Lo mejor de la animación japonesa en streaming.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>¿Tienen futuro las nuevas plataformas?</h3>
-      <p><strong>Fecha:</strong> 03 de April de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?startup,streaming" alt="Imagen relacionada con plataformas emergentes" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Plataformas emergentes: ¿competencia real?</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Películas clásicas: joyas ocultas en streaming</h3>
-      <p><strong>Fecha:</strong> 02 de April de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?classic,movie" alt="Imagen relacionada con películas clásicas" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Catálogos de películas clásicas: ¿quién gana?</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Las series que definieron 2024</h3>
-      <p><strong>Fecha:</strong> 01 de April de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?tv,drama" alt="Imagen relacionada con series populares" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Series que han marcado tendencia en 2024.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>¿Cuál plataforma es más económica?</h3>
-      <p><strong>Fecha:</strong> 31 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?money,subscription" alt="Imagen relacionada con precios de streaming" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Comparativa de precios: ¿cuál es más accesible?</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Streaming en Latinoamérica: desafíos y oportunidades</h3>
-      <p><strong>Fecha:</strong> 30 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?latinoamerica,streaming" alt="Imagen sobre streaming en Latinoamérica" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Streaming en Latinoamérica: desafíos y oportunidades.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Novedades esperadas en plataformas para 2025</h3>
-      <p><strong>Fecha:</strong> 29 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?future,streaming" alt="Imagen sobre novedades en streaming" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Novedades esperadas en plataformas para 2025.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Perfiles infantiles: control parental en streaming</h3>
-      <p><strong>Fecha:</strong> 28 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?kids,streaming" alt="Imagen sobre control parental" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Perfiles infantiles: control parental en streaming.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Series documentales recomendadas en cada plataforma</h3>
-      <p><strong>Fecha:</strong> 27 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?documentary,series" alt="Imagen sobre series documentales" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Series documentales recomendadas en cada plataforma.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Análisis de calidad de audio y video por plataforma</h3>
-      <p><strong>Fecha:</strong> 26 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?hd,4k,sound" alt="Imagen sobre calidad audiovisual" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Análisis de calidad de audio y video por plataforma.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>¿Qué app es más fácil de usar?</h3>
-      <p><strong>Fecha:</strong> 25 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?ux,app" alt="Imagen sobre experiencia de usuario" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Interfaz de usuario: ¿cuál es más intuitiva?</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Ver sin internet: la batalla de la descarga</h3>
-      <p><strong>Fecha:</strong> 24 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?offline,download" alt="Imagen sobre visualización offline" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Opciones offline: ¿cuál lo hace mejor?</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Grandes series que fueron canceladas</h3>
-      <p><strong>Fecha:</strong> 23 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?cancelled,tv" alt="Imagen sobre series canceladas" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Series originales que han sido canceladas.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Top películas exclusivas del mes</h3>
-      <p><strong>Fecha:</strong> 22 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?exclusive,movie" alt="Imagen sobre películas exclusivas" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Películas exclusivas más vistas del mes pasado.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>El impacto del streaming en el cine</h3>
-      <p><strong>Fecha:</strong> 21 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?cinema,streaming" alt="Imagen sobre impacto en el cine" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Cómo el streaming está afectando al cine tradicional.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Huelgas en Hollywood y su efecto en tu catálogo</h3>
-      <p><strong>Fecha:</strong> 20 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?strike,actors" alt="Imagen sobre huelga de actores" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Impacto de las huelgas de actores en las plataformas.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Contenido local que conquista el mundo</h3>
-      <p><strong>Fecha:</strong> 19 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?local,international,content" alt="Imagen sobre contenido local" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Contenido local vs internacional en el streaming.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Así promocionan sus series las plataformas</h3>
-      <p><strong>Fecha:</strong> 18 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?marketing,streaming" alt="Imagen sobre marketing en streaming" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Estrategias de marketing de Netflix y competidores.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>¿Quién lidera el mercado en 2025?</h3>
-      <p><strong>Fecha:</strong> 17 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?leaderboard,streaming" alt="Imagen sobre liderazgo de mercado" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>La guerra del streaming: ¿quién lidera en 2025?</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Nuevas tecnologías que mejoran tu experiencia</h3>
-      <p><strong>Fecha:</strong> 16 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?technology,innovation" alt="Imagen sobre nuevas tecnologías" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Innovaciones tecnológicas aplicadas al streaming.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Planes familiares: ¿quién ofrece más?</h3>
-      <p><strong>Fecha:</strong> 15 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?family,subscription" alt="Imagen sobre planes familiares" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Evolución de las suscripciones y planes familiares.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>¿Subtítulos o doblaje? Las preferencias reales</h3>
-      <p><strong>Fecha:</strong> 14 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?subtitles,dubbed" alt="Imagen sobre subtítulos y doblaje" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Doblaje vs subtítulos: lo que prefiere el público.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>¿Qué tan bien funciona en tu smart TV?</h3>
-      <p><strong>Fecha:</strong> 13 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?smarttv,apps" alt="Imagen sobre streaming en smart TVs" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Integración de streaming en smart TVs.</p>
-    </div>
-    <div class="section">
-  <img src="https://source.unsplash.com/900x400/?netflix" alt="Imagen relacionada con Netflix" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-  <h3>Plataformas de nicho que debes conocer</h3>
-      <p><strong>Fecha:</strong> 12 de March de 2025</p>
-      <img src="https://source.unsplash.com/900x400/?anime,horror,documentary" alt="Imagen sobre plataformas de nicho" loading="lazy" style="width:100%; height:auto; border-radius: 10px; margin-bottom: 1rem;">
-      <p>Plataformas de nicho: anime, terror, documentales.</p>
-    </div>
-  </section>
+  <!-- Script para el menú y cambio de fondo en el scroll -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const nav = document.querySelector("nav");
+      let attempts = 0;
+      const waitForMenuToggle = setInterval(() => {
+        const menuToggle = document.getElementById("menu-toggle");
+        const navLinks = document.getElementById("nav-links");
+        if (menuToggle && navLinks) {
+          clearInterval(waitForMenuToggle);
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.addEventListener("click", function () {
+            const isOpen = navLinks.classList.toggle("show");
+            menuToggle.setAttribute("aria-expanded", isOpen);
+            menuToggle.classList.toggle("active", isOpen);
+          });
+        } else if (++attempts > 100) {
+          clearInterval(waitForMenuToggle);
+          console.warn("menu-toggle o nav-links no fueron encontrados en el DOM después de múltiples intentos.");
+        }
+      }, 50);
+      
+      window.addEventListener("scroll", function () {
+        const scrolled = window.scrollY > 50;
+        nav.style.background = scrolled ? "#1e1e2f" : "#333";
+        nav.style.boxShadow = scrolled ? "0 2px 10px rgba(0, 0, 0, 0.3)" : "none";
+      });
+    });
+  </script>
 
-  <section id="comparativas" class="section">
-    <h2>Comparativa Rápida</h2>
-    <ul>
-      <li><strong>Netflix:</strong> Mucho contenido, precios medios.</li>
-      <li><strong>Disney+:</strong> Enfoque familiar, catálogo icónico.</li>
-      <li><strong>HBO Max:</strong> Cine de estreno, series de calidad.</li>
-      <li><strong>Amazon Prime Video:</strong> Variedad y beneficios de Prime.</li>
-      <li><strong>Apple TV+:</strong> Contenido original exclusivo.</li>
-      <li><strong>Star+:</strong> Deportes en vivo y series para adultos.</li>
-    </ul>
-  </section>
+  <!-- Botón "Volver arriba" -->
+  <button onclick="topFunction()" id="scrollTopBtn" title="Volver arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 4l-6 6h4v6h4v-6h4l-6-6z"/>
+    </svg>
+  </button>
+  <script>
+    function topFunction() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.onscroll = function () {
+      const scrollTopBtn = document.getElementById("scrollTopBtn");
+      scrollTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+    };
+  </script>
 
-  <section id="contacto" class="section">
-    <h2>Contacto</h2>
-    <p>¿Tienes dudas o quieres sugerir una reseña? Completa el siguiente formulario o escríbenos a: <a href="mailto:adserty797@gmail.com">adserty797@gmail.com</a></p>
-    <form action="https://formspree.io/f/your-form-id" method="POST">
-      <input type="text" name="name" placeholder="Tu nombre" required>
-      <input type="email" name="_replyto" placeholder="Tu correo electrónico" required>
-      <textarea name="message" placeholder="Tu mensaje" required></textarea>
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
-
-  <section id="privacidad" class="section">
-    <h2>Política de Privacidad</h2>
-    <p>Este sitio no recopila información personal sin consentimiento. Utilizamos cookies para mejorar la experiencia del usuario. Si tienes dudas sobre nuestra política, contáctanos.</p>
-  </section>
-  <section id="terminos" class="section">
-    <h2>Términos y Condiciones</h2>
-    <p>El uso de este sitio implica la aceptación de los siguientes términos y condiciones:</p>
-    <ul>
-      <li>Este sitio tiene fines informativos y de entretenimiento sobre plataformas de streaming.</li>
-      <li>No estamos afiliados oficialmente con ninguna plataforma mencionada.</li>
-      <li>Los enlaces externos pueden llevar a sitios de terceros con sus propias políticas de privacidad.</li>
-      <li>No garantizamos la disponibilidad o exactitud total de la información publicada.</li>
-      <li>El contenido puede actualizarse o modificarse sin previo aviso.</li>
-    </ul>
-    <p>Para cualquier duda, por favor contáctanos a través del formulario de contacto.</p>
-  </section>
-  <section class="section">
-    <h2>Comparte este sitio</h2>
-    <p>Si te gustó el contenido, compártelo en tus redes sociales:</p>
-    <div style="display: flex; gap: 1rem;">
-      <a href="https://www.facebook.com/sharer/sharer.php?u=https://tusitioweb.com" target="_blank">Facebook</a>
-      <a href="https://twitter.com/intent/tweet?url=https://tusitioweb.com&text=Descubre%20reseñas%20de%20plataformas%20de%20streaming" target="_blank">Twitter</a>
-      <a href="https://wa.me/?text=Echa%20un%20vistazo%20a%20este%20blog%20de%20streaming:%20https://tusitioweb.com" target="_blank">WhatsApp</a>
-    </div>
-  </section>
-</div>
-<button onclick="topFunction()" id="scrollTopBtn" title="Volver arriba">↑</button>
-<script>
-  // Botón volver arriba
-  const scrollTopBtn = document.createElement('button');
-  scrollTopBtn.id = 'scrollTopBtn';
-  scrollTopBtn.title = 'Volver arriba';
-  scrollTopBtn.innerText = '↑';
-  scrollTopBtn.style.position = 'fixed';
-  scrollTopBtn.style.bottom = '40px';
-  scrollTopBtn.style.right = '20px';
-  scrollTopBtn.style.padding = '10px 15px';
-  scrollTopBtn.style.fontSize = '20px';
-  scrollTopBtn.style.borderRadius = '50%';
-  scrollTopBtn.style.border = 'none';
-  scrollTopBtn.style.background = '#1e88e5';
-  scrollTopBtn.style.color = '#fff';
-  scrollTopBtn.style.cursor = 'pointer';
-  scrollTopBtn.style.display = 'none';
-  scrollTopBtn.style.zIndex = '1000';
-  document.body.appendChild(scrollTopBtn);
-
-  window.onscroll = function () {
-    scrollTopBtn.style.display = (document.documentElement.scrollTop > 300) ? 'block' : 'none';
-  };
-
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-</script>
 </body>
 </html>
 
