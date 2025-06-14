@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>StreamFocus - Reseñas de Streaming</title>
+    <link>https://streamfocus.lat/</link>
+    <description>Blog sobre comparativas de plataformas de streaming</description>
+    <language>es</language>
+    <lastBuildDate>Sat, 14 Jun 2025 15:10:31 +0000</lastBuildDate>
+
+    <item>
+      <title>El dominio de Netflix: ¿Mito o realidad?</title>
+      <link>https://streamfocus.lat/#entrada1</link>
+      <description>Análisis profundo sobre la evolución y liderazgo de Netflix en el mercado.</description>
+      <pubDate>Thu, 10 Apr 2025 00:00:00 +0000</pubDate>
+    </item>
+
+    <item>
+      <title>Disney+ y su magia familiar</title>
+      <link>https://streamfocus.lat/#entrada2</link>
+      <description>Una mirada a cómo Disney+ se ha posicionado como la opción ideal para familias.</description>
+      <pubDate>Wed, 09 Apr 2025 00:00:00 +0000</pubDate>
+    </item>
+
+    <item>
+      <title>HBO Max: Calidad sobre cantidad</title>
+      <link>https://streamfocus.lat/#entrada3</link>
+      <description>Análisis de las producciones y estrategia de HBO Max para competir en el mercado.</description>
+      <pubDate>Tue, 08 Apr 2025 00:00:00 +0000</pubDate>
+    </item>
+
+    <item>
+      <title>Amazon Prime Video: Más que solo envíos</title>
+      <link>https://streamfocus.lat/#entrada4</link>
+      <description>Descubre los beneficios adicionales y ventajas competitivas de Prime Video.</description>
+      <pubDate>Mon, 07 Apr 2025 00:00:00 +0000</pubDate>
+    </item>
+
+    <item>
+      <title>Apple TV+: Originalidad sin límites</title>
+      <link>https://streamfocus.lat/#entrada5</link>
+      <description>Una revisión de las producciones originales y el enfoque creativo de Apple TV+.</description>
+      <pubDate>Sun, 06 Apr 2025 00:00:00 +0000</pubDate>
+    </item>
+
+  </channel>
+</rss>
