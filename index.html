@@ -2,39 +2,41 @@
 
 <html lang="es">
 <head>
-<!--bloqueador de anuncios  (actualizado y adaptable) -->
-  <script defer src='https://static.hispanoads.es/ttt.js?scriptId=ab00bf88-307d-42eb-b5c0-19e3f03015da' id="anti-ab"></script>
-  
-             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5710936095528547"
-     crossorigin="anonymous"></script>                                                                                    
-
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5710936095528547"
+     crossorigin="anonymous"></script>
   
 <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
- 
-<script defer id="videoo-library" data-cfasync="false" data-id="fdbf1b38d369f63c3c24d3f5d28ae7bd1ba57c1364f81a9f5b52a1464007a4c8"src="https://static.videoo.tv/fdbf1b38d369f63c3c24d3f5d28ae7bd1ba57c1364f81a9f5b52a1464007a4c8.js"></script>
 
 
- 
 <script>
   window.googletag = window.googletag || {cmd: []};
-  googletag.cmd.push(function() {
-    googletag.defineSlot('/23309453042/streamfocus/streamfocus_Content1', [[250, 250], [336, 280], [300, 250]], 'Content1').addService(googletag.pubads());
-    googletag.defineSlot('/23309453042/streamfocus/streamfocus_Content2', [[250, 250], [336, 280], [300, 250]], 'Content2').addService(googletag.pubads());
-    googletag.defineSlot('/23309453042/streamfocus/streamfocus_Content3', [[250, 250], [336, 280], [300, 250]], 'Content3').addService(googletag.pubads());
-    googletag.defineSlot('/23309453042/streamfocus/streamfocus_Content4', [[250, 250], [336, 280], [300, 250]], 'Content4').addService(googletag.pubads());
-    googletag.defineSlot('/23309453042/streamfocus/streamfocus_Content5', [[250, 250], [336, 280], [300, 250]], 'Content5').addService(googletag.pubads());
-    googletag.defineSlot('/23309453042/streamfocus/streamfocus_Content6', [[250, 250], [336, 280], [300, 250]], 'Content6').addService(googletag.pubads());
-    googletag.defineSlot('/23309453042/streamfocus/streamfocus_Content7', [[250, 250], [336, 280], [300, 250]], 'Content7').addService(googletag.pubads());
-    googletag.defineSlot('/23309453042/streamfocus/streamfocus_Content8', [[250, 250], [336, 280], [300, 250]], 'Content8').addService(googletag.pubads());
-    googletag.defineSlot('/23309453042/streamfocus/streamfocus_Content9', [[250, 250], [336, 280], [300, 250]], 'Content9').addService(googletag.pubads());
-    googletag.pubads().enableSingleRequest();
-    googletag.enableServices();
-  });
 
- 
+  googletag.cmd.push(function() {
+    googletag.pubads().setTargeting('id_post_wp', ['<?php echo get_the_ID(); ?>']);
+    if(window.location.search){
+		var queryString = window.location.search;
+		var urlParams = new URLSearchParams(queryString);
+		var utm_source = urlParams.get('utm_source');
+		var utm_medium = urlParams.get('utm_medium');
+		var utm_campaign = urlParams.get('utm_campaign');
+
+		if(utm_source){
+			googletag.pubads().setTargeting('utm_source', [utm_source]);
+		}
+
+		if(utm_medium){
+			googletag.pubads().setTargeting('utm_medium', [utm_medium]);
+		}
+
+		if(utm_campaign){
+			googletag.pubads().setTargeting('utm_campaign', [utm_campaign]);
+		}
+	}
+  })
+
 // Interstitial
 googletag.cmd.push(function() {
-    var slot = googletag.defineOutOfPageSlot('/23309453042/streamfocus/streamfocus_Interstitial', googletag.enums.OutOfPageFormat.INTERSTITIAL);
+    var slot = googletag.defineOutOfPageSlot('/23309453042/streamfocuss/streamfocuss_Interstitial', googletag.enums.OutOfPageFormat.INTERSTITIAL);
     if (slot) slot.addService(googletag.pubads());
     googletag.enableServices();
     googletag.display(slot);
@@ -43,14 +45,14 @@ googletag.cmd.push(function() {
 
 // Anchor
 googletag.cmd.push(function() {
-    var anchorSlot = googletag.defineOutOfPageSlot('/23309453042/streamfocus/streamfocus_Anchor', googletag.enums.OutOfPageFormat.TOP_ANCHOR);
+    var anchorSlot = googletag.defineOutOfPageSlot('/23309453042/streamfocuss/streamfocuss_Anchor', googletag.enums.OutOfPageFormat.TOP_ANCHOR);
     if (anchorSlot) {
         anchorSlot.addService(googletag.pubads());
     }
     googletag.enableServices();
     googletag.display(anchorSlot);
 });
-  
+
 </script>
 
 
@@ -150,12 +152,7 @@ googletag.cmd.push(function() {
 </section>
 <section id="blog">
 <div class="section">
-  <div id='Content1' style='min-width: 250px; min-height: 250px;'>
-  <script>
-    googletag.cmd.push(function() { googletag.display('content1'); });
-  </script>
-</div>
-
+ 
 
   <!-- entrada 1 (actualizado y adaptable) -->
   <div class="section">
@@ -167,13 +164,31 @@ googletag.cmd.push(function() {
 <p>¿Quieres ser de los primeros en disfrutar de las mejores recompensas y ventajas secretas dentro del servidor privado de Sammy?</p>
 <p>👉 No te pierdas esta oportunidad única y descubre todo lo que te espera con un solo clic. <a href="servidor-sammy.html"> <h3>LEER MASS...</h3></a>  </p> 
     </div>
-
-  <div id='Content3' style='min-width: 250px; min-height: 250px;'>
+  
   <script>
-    googletag.cmd.push(function() { googletag.display('content3'); });
-  </script>
+var Content1_slot;
+googletag.cmd.push(function() {
+
+	var mapping = 	googletag.sizeMapping().addSize([0, 0], ['fluid',[250, 250],[300, 250],[336, 280]]).build();
+
+	Content1_slot = googletag.defineSlot("/23309453042/streamfocuss/streamfocuss_Content1",[[250, 250],[300, 250],[336, 280]], "Content1")
+							.defineSizeMapping(mapping)
+							.setCollapseEmptyDiv(true)
+							.addService(googletag.pubads());
+
+					googletag.enableServices();
+
+});
+</script>
+
+<div id="Content1">
+	<script>
+		    googletag.cmd.push(function() { googletag.display('Content1'); });
+	</script>
 </div>
 
+
+ 
 
 <div class="section">
  <a href="robux.html">
@@ -186,11 +201,34 @@ googletag.cmd.push(function() {
  <p>¿quieres saber cómo lo logran? 👉 Descubre el método oculto dando clic aquí. <a href="servidor-sammy.html"> <h3>LEER MASS...</h3>
 </a></p>
   </div>
-  <div id='Content2' style='min-width: 250px; min-height: 250px;'>
+
   <script>
-    googletag.cmd.push(function() { googletag.display('content2'); });
-  </script>
+var Content2_slot;
+googletag.cmd.push(function() {
+
+	var mapping = 	googletag.sizeMapping().addSize([0, 0], ['fluid',[250, 250],[300, 250],[336, 280]]).build();
+
+	Content2_slot = googletag.defineSlot("/23309453042/streamfocuss/streamfocuss_Content2",[[250, 250],[300, 250],[336, 280]], "Content2")
+							.defineSizeMapping(mapping)
+							.setCollapseEmptyDiv(true)
+							.addService(googletag.pubads());
+					googletag.pubads().enableLazyLoad({
+										fetchMarginPercent: 20,
+										renderMarginPercent: 10,
+										mobileScaling: 2.0
+          			});
+					googletag.enableServices();
+
+});
+</script>
+
+<div id="Content2">
+	<script>
+		    googletag.cmd.push(function() { googletag.display('Content2'); });
+	</script>
 </div>
+
+
 
 <!-- Entrada 3: 08 de abril de 2025 -->
  
@@ -205,11 +243,33 @@ googletag.cmd.push(function() {
 <p>👀 ¿Quieres descubrir cómo desbloquear apariencias que sorprendan a todos?  Haz clic y entérate del truco oculto 👉.<a href="servidor-sammy.html"> <h3>LEER MASS...</h3>
 </a> 
  </div>
- <div id='Content4' style='min-width: 250px; min-height: 250px;'>
+
   <script>
-    googletag.cmd.push(function() { googletag.display('content4'); });
-  </script>
+var Content3_slot;
+googletag.cmd.push(function() {
+
+	var mapping = 	googletag.sizeMapping().addSize([0, 0], ['fluid',[250, 250],[300, 250],[336, 280]]).build();
+
+	Content3_slot = googletag.defineSlot("/23309453042/streamfocuss/streamfocuss_Content3",[[250, 250],[300, 250],[336, 280]], "Content3")
+							.defineSizeMapping(mapping)
+							.setCollapseEmptyDiv(true)
+							.addService(googletag.pubads());
+					googletag.pubads().enableLazyLoad({
+										fetchMarginPercent: 20,
+										renderMarginPercent: 10,
+										mobileScaling: 2.0
+          			});
+					googletag.enableServices();
+
+});
+</script>
+
+<div id="Content3">
+	<script>
+		    googletag.cmd.push(function() { googletag.display('Content3'); });
+	</script>
 </div>
+
 
 
 <!-- Entrada 4: 07 de abril de 2025 -->
@@ -224,11 +284,33 @@ googletag.cmd.push(function() {
 <p>¿Quieres descubrir cómo ganar ventaja y dominar cada partida? 👉 <a href="servidor-sammy.html"> <h3>LEER MASS...</h3>
 </a></p> 
 </div>
- <div id='Content5' style='min-width: 250px; min-height: 250px;'>
+
   <script>
-    googletag.cmd.push(function() { googletag.display('content5'); });
-  </script>
+var Content4_slot;
+googletag.cmd.push(function() {
+
+	var mapping = 	googletag.sizeMapping().addSize([0, 0], ['fluid',[250, 250],[300, 250],[336, 280]]).build();
+
+	Content4_slot = googletag.defineSlot("/23309453042/streamfocuss/streamfocuss_Content4",[[250, 250],[300, 250],[336, 280]], "Content4")
+							.defineSizeMapping(mapping)
+							.setCollapseEmptyDiv(true)
+							.addService(googletag.pubads());
+					googletag.pubads().enableLazyLoad({
+										fetchMarginPercent: 20,
+										renderMarginPercent: 10,
+										mobileScaling: 2.0
+          			});
+					googletag.enableServices();
+
+});
+</script>
+
+<div id="Content4">
+	<script>
+		    googletag.cmd.push(function() { googletag.display('Content4'); });
+	</script>
 </div>
+
 
  
 </section>
@@ -236,6 +318,34 @@ googletag.cmd.push(function() {
 <h2>Contacto</h2>
 <p>Si deseas ponerte en contacto con nosotros, envíanos un correo a <a href="todosera047@gmail.com">todosera047@gmail.com</a>.</p>
 </section>
+  
+  <script>
+var Content5_slot;
+googletag.cmd.push(function() {
+
+	var mapping = 	googletag.sizeMapping().addSize([0, 0], ['fluid',[250, 250],[300, 250],[336, 280]]).build();
+
+	Content5_slot = googletag.defineSlot("/23309453042/streamfocuss/streamfocuss_Content5",[[250, 250],[300, 250],[336, 280]], "Content5")
+							.defineSizeMapping(mapping)
+							.setCollapseEmptyDiv(true)
+							.addService(googletag.pubads());
+					googletag.pubads().enableLazyLoad({
+										fetchMarginPercent: 20,
+										renderMarginPercent: 10,
+										mobileScaling: 2.0
+          			});
+					googletag.enableServices();
+
+});
+</script>
+
+<div id="Content5">
+	<script>
+		    googletag.cmd.push(function() { googletag.display('Content5'); });
+	</script>
+</div>
+
+
 <section id="privacidad">
 <h2>Política de Privacidad</h2>
 <p class="legal">En StreamFocus respetamos tu privacidad. No compartimos tu información personal con terceros. Utilizamos cookies y tecnologías similares para mejorar tu experiencia de navegación, personalizar contenido y analizar nuestro tráfico. Puedes desactivar las cookies en la configuración de tu navegador, aunque algunas funciones del sitio podrían verse afectadas. No almacenamos datos sensibles y cumplimos con las leyes de protección de datos aplicables.</p>
@@ -278,6 +388,7 @@ Permiten que la página recuerde tus acciones y preferencias durante un tiempo.<
 <p>Al hacer clic en <strong>“Aceptar”</strong> en nuestro banner de cookies o continuar navegando por el sitio, 
 aceptas el uso de cookies conforme a esta política.</p>
 </section>
+  
 <footer>
 <p>© 2025 StreamFocus - Todos los derechos reservados | <a href="#privacidad" style="color:#fff;">Política de Privacidad</a> | <a href="#cookies" style="color:#fff;">Política de Cookies</a> | <a href="#aviso" style="color:#fff;">Aviso Legal</a></p>
 </footer>
